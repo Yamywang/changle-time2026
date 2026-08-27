@@ -34,6 +34,8 @@
       --daye-soft: #f0e9fa;
       --fun: #2bb3a3;
       --fun-soft: #ddf4f0;
+      --study: #e0666a;
+      --study-soft: #fce9ea;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -235,6 +237,8 @@
     .st-daye .s-val { color: #8156bd; }
     .st-fun { background: var(--fun-soft); }
     .st-fun .s-val { color: #1f9c8d; }
+    .st-study { background: var(--study-soft); }
+    .st-study .s-val { color: #c1454b; }
     .st-free { background: var(--primary-very-soft); }
     .st-free .s-val { color: var(--primary-dark); }
 
@@ -316,6 +320,7 @@
     .t-block.cat-family { background: var(--family-soft); border-color: var(--family); color: #cf8320; }
     .t-block.cat-daye { background: var(--daye-soft); border-color: var(--daye); color: #8156bd; }
     .t-block.cat-fun { background: var(--fun-soft); border-color: var(--fun); color: #1f9c8d; }
+    .t-block.cat-study { background: var(--study-soft); border-color: var(--study); color: #c1454b; }
 
     /* 复盘 */
     .review-input {
@@ -413,12 +418,15 @@
         <div class="stat-chip st-life"><div class="s-label"><span class="s-dot" style="background:var(--life)"></span>生活</div><div class="s-val" id="stLife">0h</div></div>
         <div class="stat-chip st-work"><div class="s-label"><span class="s-dot" style="background:var(--work)"></span>工作</div><div class="s-val" id="stWork">0h</div></div>
         <div class="stat-chip st-baby"><div class="s-label"><span class="s-dot" style="background:var(--baby)"></span>任务</div><div class="s-val" id="stBaby">0h</div></div>
-        <div class="stat-chip st-sleep"><div class="s-label"><span class="s-dot" style="background:var(--sleep)"></span>睡觉</div><div class="s-val" id="stSleep">0h</div></div>
       </div>
       <div class="stat-row" style="margin-top:6px">
+        <div class="stat-chip st-sleep"><div class="s-label"><span class="s-dot" style="background:var(--sleep)"></span>睡觉</div><div class="s-val" id="stSleep">0h</div></div>
         <div class="stat-chip st-family"><div class="s-label"><span class="s-dot" style="background:var(--family)"></span>家庭</div><div class="s-val" id="stFamily">0h</div></div>
         <div class="stat-chip st-daye"><div class="s-label"><span class="s-dot" style="background:var(--daye)"></span>大爷</div><div class="s-val" id="stDaye">0h</div></div>
+      </div>
+      <div class="stat-row" style="margin-top:6px">
         <div class="stat-chip st-fun"><div class="s-label"><span class="s-dot" style="background:var(--fun)"></span>娱乐</div><div class="s-val" id="stFun">0h</div></div>
+        <div class="stat-chip st-study"><div class="s-label"><span class="s-dot" style="background:var(--study)"></span>学习</div><div class="s-val" id="stStudy">0h</div></div>
         <div class="stat-chip st-free"><div class="s-label"><span class="s-dot" style="background:var(--primary)"></span>未记录</div><div class="s-val" id="stFree">24h</div></div>
       </div>
     </div>
@@ -437,6 +445,7 @@
         <div class="mode-btn" data-mode="family"><span class="m-dot" style="background:var(--family)"></span>家庭</div>
         <div class="mode-btn" data-mode="daye"><span class="m-dot" style="background:var(--daye)"></span>大爷</div>
         <div class="mode-btn" data-mode="fun"><span class="m-dot" style="background:var(--fun)"></span>娱乐</div>
+        <div class="mode-btn" data-mode="study"><span class="m-dot" style="background:var(--study)"></span>学习</div>
         <div class="mode-btn" data-mode="clear"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>擦除</div>
       </div>
       <div class="fill-night" onclick="fillNightSleep()">🌙 一键填充夜间睡觉(22:00 - 次日 7:00)</div>
@@ -483,7 +492,7 @@
     var currentDate = todayStr;
     var currentMode = 'life';
 
-    var CATS = { life: '生活', work: '工作', baby: '任务', family: '家庭', daye: '大爷', fun: '娱乐', sleep: '睡觉' };
+    var CATS = { life: '生活', work: '工作', baby: '任务', family: '家庭', daye: '大爷', fun: '娱乐', study: '学习', sleep: '睡觉' };
 
     function key(prefix) { return 'tm-' + currentDate + '-' + prefix; }
 
@@ -546,7 +555,7 @@
     });
 
     function applyBlock(block, cat) {
-      block.classList.remove('cat-sleep','cat-life','cat-work','cat-baby','cat-family','cat-daye','cat-fun');
+      block.classList.remove('cat-sleep','cat-life','cat-work','cat-baby','cat-family','cat-daye','cat-fun','cat-study');
       if (cat) {
         block.classList.add('cat-' + cat);
         block.textContent = CATS[cat];
@@ -610,7 +619,8 @@
       var family = countForDate(currentDate, 'family');
       var daye = countForDate(currentDate, 'daye');
       var fun = countForDate(currentDate, 'fun');
-      var free = 48 - life - work - baby - sleep - family - daye - fun;
+      var study = countForDate(currentDate, 'study');
+      var free = 48 - life - work - baby - sleep - family - daye - fun - study;
       document.getElementById('stLife').textContent = (life/2) + 'h';
       document.getElementById('stWork').textContent = (work/2) + 'h';
       document.getElementById('stBaby').textContent = (baby/2) + 'h';
@@ -618,6 +628,7 @@
       document.getElementById('stFamily').textContent = (family/2) + 'h';
       document.getElementById('stDaye').textContent = (daye/2) + 'h';
       document.getElementById('stFun').textContent = (fun/2) + 'h';
+      document.getElementById('stStudy').textContent = (study/2) + 'h';
       document.getElementById('stFree').textContent = (free/2) + 'h';
     }
 
