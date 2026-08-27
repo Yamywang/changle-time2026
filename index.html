@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="时间管理" />
   <meta name="theme-color" content="#6fa873" />
-  <title>是长乐呀²⁰²⁶ · 时间管理工作台</title>
+  <title>大毛 · 时间管理工作台</title>
   <style>
     :root {
       --bg: #edf4ea;
@@ -28,6 +28,12 @@
       --baby-soft: #fbe8ef;
       --sleep: #98a6b5;
       --sleep-soft: #e9edf2;
+      --family: #e6a23c;
+      --family-soft: #fbf0dd;
+      --daye: #9b6dd6;
+      --daye-soft: #f0e9fa;
+      --fun: #2bb3a3;
+      --fun-soft: #ddf4f0;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -223,6 +229,12 @@
     .st-baby .s-val { color: #c46e8f; }
     .st-sleep { background: var(--sleep-soft); }
     .st-sleep .s-val { color: #7a8ba0; }
+    .st-family { background: var(--family-soft); }
+    .st-family .s-val { color: #cf8320; }
+    .st-daye { background: var(--daye-soft); }
+    .st-daye .s-val { color: #8156bd; }
+    .st-fun { background: var(--fun-soft); }
+    .st-fun .s-val { color: #1f9c8d; }
     .st-free { background: var(--primary-very-soft); }
     .st-free .s-val { color: var(--primary-dark); }
 
@@ -301,6 +313,9 @@
     .t-block.cat-life { background: var(--life-soft); border-color: var(--life); color: #3d9947; }
     .t-block.cat-work { background: var(--work-soft); border-color: var(--work); color: #3579b8; }
     .t-block.cat-baby { background: var(--baby-soft); border-color: var(--baby); color: #c46e8f; }
+    .t-block.cat-family { background: var(--family-soft); border-color: var(--family); color: #cf8320; }
+    .t-block.cat-daye { background: var(--daye-soft); border-color: var(--daye); color: #8156bd; }
+    .t-block.cat-fun { background: var(--fun-soft); border-color: var(--fun); color: #1f9c8d; }
 
     /* 复盘 */
     .review-input {
@@ -355,7 +370,7 @@
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <div>
-        <div class="brand">是长乐呀²⁰²⁶ <span class="sub">时间管理</span></div>
+        <div class="brand">大毛 <span class="sub">时间管理</span></div>
       </div>
     </div>
     <div class="date">
@@ -397,10 +412,13 @@
       <div class="stat-row">
         <div class="stat-chip st-life"><div class="s-label"><span class="s-dot" style="background:var(--life)"></span>生活</div><div class="s-val" id="stLife">0h</div></div>
         <div class="stat-chip st-work"><div class="s-label"><span class="s-dot" style="background:var(--work)"></span>工作</div><div class="s-val" id="stWork">0h</div></div>
+        <div class="stat-chip st-baby"><div class="s-label"><span class="s-dot" style="background:var(--baby)"></span>任务</div><div class="s-val" id="stBaby">0h</div></div>
+        <div class="stat-chip st-sleep"><div class="s-label"><span class="s-dot" style="background:var(--sleep)"></span>睡觉</div><div class="s-val" id="stSleep">0h</div></div>
       </div>
       <div class="stat-row" style="margin-top:6px">
-        <div class="stat-chip st-baby"><div class="s-label"><span class="s-dot" style="background:var(--baby)"></span>备孕</div><div class="s-val" id="stBaby">0h</div></div>
-        <div class="stat-chip st-sleep"><div class="s-label"><span class="s-dot" style="background:var(--sleep)"></span>睡觉</div><div class="s-val" id="stSleep">0h</div></div>
+        <div class="stat-chip st-family"><div class="s-label"><span class="s-dot" style="background:var(--family)"></span>家庭</div><div class="s-val" id="stFamily">0h</div></div>
+        <div class="stat-chip st-daye"><div class="s-label"><span class="s-dot" style="background:var(--daye)"></span>大爷</div><div class="s-val" id="stDaye">0h</div></div>
+        <div class="stat-chip st-fun"><div class="s-label"><span class="s-dot" style="background:var(--fun)"></span>娱乐</div><div class="s-val" id="stFun">0h</div></div>
         <div class="stat-chip st-free"><div class="s-label"><span class="s-dot" style="background:var(--primary)"></span>未记录</div><div class="s-val" id="stFree">24h</div></div>
       </div>
     </div>
@@ -414,8 +432,11 @@
       <div class="mode-group" id="modeGroup">
         <div class="mode-btn on" data-mode="life"><span class="m-dot" style="background:var(--life)"></span>生活</div>
         <div class="mode-btn" data-mode="work"><span class="m-dot" style="background:var(--work)"></span>工作</div>
-        <div class="mode-btn" data-mode="baby"><span class="m-dot" style="background:var(--baby)"></span>备孕任务</div>
+        <div class="mode-btn" data-mode="baby"><span class="m-dot" style="background:var(--baby)"></span>任务</div>
         <div class="mode-btn" data-mode="sleep"><span class="m-dot" style="background:var(--sleep)"></span>睡觉</div>
+        <div class="mode-btn" data-mode="family"><span class="m-dot" style="background:var(--family)"></span>家庭</div>
+        <div class="mode-btn" data-mode="daye"><span class="m-dot" style="background:var(--daye)"></span>大爷</div>
+        <div class="mode-btn" data-mode="fun"><span class="m-dot" style="background:var(--fun)"></span>娱乐</div>
         <div class="mode-btn" data-mode="clear"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>擦除</div>
       </div>
       <div class="fill-night" onclick="fillNightSleep()">🌙 一键填充夜间睡觉(22:00 - 次日 7:00)</div>
@@ -462,7 +483,7 @@
     var currentDate = todayStr;
     var currentMode = 'life';
 
-    var CATS = { life: '生活', work: '工作', baby: '备孕', sleep: '睡觉' };
+    var CATS = { life: '生活', work: '工作', baby: '任务', family: '家庭', daye: '大爷', fun: '娱乐', sleep: '睡觉' };
 
     function key(prefix) { return 'tm-' + currentDate + '-' + prefix; }
 
@@ -525,7 +546,7 @@
     });
 
     function applyBlock(block, cat) {
-      block.classList.remove('cat-sleep','cat-life','cat-work','cat-baby');
+      block.classList.remove('cat-sleep','cat-life','cat-work','cat-baby','cat-family','cat-daye','cat-fun');
       if (cat) {
         block.classList.add('cat-' + cat);
         block.textContent = CATS[cat];
@@ -586,11 +607,17 @@
       var work = countForDate(currentDate, 'work');
       var baby = countForDate(currentDate, 'baby');
       var sleep = countForDate(currentDate, 'sleep');
-      var free = 48 - life - work - baby - sleep;
+      var family = countForDate(currentDate, 'family');
+      var daye = countForDate(currentDate, 'daye');
+      var fun = countForDate(currentDate, 'fun');
+      var free = 48 - life - work - baby - sleep - family - daye - fun;
       document.getElementById('stLife').textContent = (life/2) + 'h';
       document.getElementById('stWork').textContent = (work/2) + 'h';
       document.getElementById('stBaby').textContent = (baby/2) + 'h';
       document.getElementById('stSleep').textContent = (sleep/2) + 'h';
+      document.getElementById('stFamily').textContent = (family/2) + 'h';
+      document.getElementById('stDaye').textContent = (daye/2) + 'h';
+      document.getElementById('stFun').textContent = (fun/2) + 'h';
       document.getElementById('stFree').textContent = (free/2) + 'h';
     }
 
